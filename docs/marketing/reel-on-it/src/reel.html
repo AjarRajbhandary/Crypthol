@@ -3,167 +3,185 @@
 <style>
 @font-face{font-family:Inter;src:url(fonts/inter.woff2) format('woff2');font-weight:100 900}
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0B0D12;--panel:#17191F;--line:#262A33;--text:#ECEEF2;--muted:#8A919E;--accent:#8B7CFF;--accent2:#B6ABFF;--ok:#22C55E;--warn:#FACC15}
+:root{--bg:#F8F9FC;--card:#FFFFFF;--line:#E7E9EF;--text:#0B0B10;--muted:#6B7280;--blue:#2F6BE6;--chipbg:linear-gradient(180deg,#E9F1FF,#C9DCFB);--chiptx:#3B7BDF;--red:#E5484D;--amber:#F5B400;
+  --grad:linear-gradient(90deg,#1D6EF7 0%,#4C5DF2 25%,#944AE1 50%,#D44998 75%,#EC593F 100%)}
 html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Inter,'Noto Color Emoji',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
-.layer{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
-.bgglow{position:absolute;inset:0;background:radial-gradient(900px 700px at 80% 10%,rgba(139,124,255,.18),transparent 60%),radial-gradient(800px 800px at 10% 90%,rgba(34,197,94,.08),transparent 60%)}
-/* chat panel */
-.panel{position:absolute;left:40px;right:40px;top:430px;height:1400px;background:var(--panel);border:2px solid var(--line);border-radius:44px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.5)}
-.phead{height:118px;border-bottom:2px solid var(--line);display:flex;align-items:center;padding:0 44px;gap:18px;background:#1B1E25;position:relative;z-index:2}
+.layer{position:absolute;inset:0;opacity:0}
+.blob{position:absolute;border-radius:50%;filter:blur(120px)}
+/* logo */
+.mark{background:#000;display:flex;align-items:center;justify-content:center;box-shadow:0 24px 60px rgba(20,20,40,.22)}
+.mark img{width:100%;height:100%}
+.wm{font-weight:700;letter-spacing:-.035em;color:#0B0B10}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* chat */
+.panel{position:absolute;left:40px;right:40px;top:430px;height:1400px;background:var(--card);border:2px solid var(--line);border-radius:44px;overflow:hidden;box-shadow:0 40px 120px rgba(40,50,90,.14)}
+.phead{height:118px;border-bottom:2px solid var(--line);display:flex;align-items:center;padding:0 44px;gap:18px;background:#fff;position:relative;z-index:2}
 .phead .ch{font-weight:800;font-size:40px}
-.phead .sub{color:var(--muted);font-size:28px;margin-left:auto}
+.phead .sub{color:var(--muted);font-size:28px;margin-left:auto;font-weight:500}
 .msgs{position:absolute;left:0;right:0;top:118px;padding:0 44px}
 .msg{display:flex;gap:26px;padding:22px 0}
-.av{width:84px;height:84px;border-radius:22px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:36px;color:#0B0D12}
+.av{width:84px;height:84px;border-radius:22px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:30px;background:#EFF0F4;color:#4B5060}
+.av.p{background:#000;padding:0;overflow:hidden}.av.p img{width:100%;height:100%}
+.mb{flex:1;min-width:0}
 .mb .nm{font-weight:800;font-size:34px}
 .mb .tm{color:var(--muted);font-size:26px;font-weight:500;margin-left:12px}
-.mb .tx{font-size:38px;line-height:1.3;margin-top:6px;color:#D9DCE3}
+.app{display:inline-block;background:#EEEFF2;color:#6B7280;font-size:22px;font-weight:700;border-radius:8px;padding:3px 10px;margin-left:12px;vertical-align:4px}
+.mb .tx{font-size:38px;line-height:1.3;margin-top:6px;color:#1F2128}
+.at{background:#E8F0FD;color:#1D5FD1;border-radius:8px;padding:0 8px}
 .hl{border-radius:24px;margin:0 -20px;padding:22px 20px}
-.divider{display:flex;align-items:center;gap:20px;color:var(--muted);font-size:26px;font-weight:700;padding:26px 0}
-.divider:before,.divider:after{content:"";flex:1;height:2px;background:var(--line)}
 /* caption pill */
 .cap{position:absolute;left:0;right:0;display:flex;justify-content:center;opacity:0}
-.cap span{background:rgba(10,11,15,.88);border:2px solid rgba(255,255,255,.08);padding:26px 44px;border-radius:30px;font-weight:900;font-size:66px;letter-spacing:-1.5px;line-height:1.1;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);max-width:940px}
-.cap em{font-style:normal;color:var(--accent2)}
-/* s1 big card */
-.bigcard{position:absolute;left:90px;right:90px;top:700px;background:#1F232B;border:3px solid rgba(250,204,21,.9);border-radius:44px;padding:48px 52px;display:flex;gap:36px;align-items:center;box-shadow:0 0 0 14px rgba(250,204,21,.12),0 40px 140px rgba(0,0,0,.7)}
-.bigcard .av{width:150px;height:150px;border-radius:38px;font-size:64px}
+.cap>span{background:#111215;color:#fff;padding:26px 44px;border-radius:30px;font-weight:800;font-size:62px;letter-spacing:-1.5px;line-height:1.1;text-align:center;box-shadow:0 20px 60px rgba(20,20,40,.25);max-width:960px}
+.cap em{font-style:normal;color:#9DBBFF}
+/* chips like v13 */
+.chip{display:inline-flex;align-items:center;gap:14px;border-radius:999px;padding:6px 26px 10px 12px;background:var(--chipbg);color:var(--chiptx);box-shadow:0 14px 40px rgba(59,123,223,.25);vertical-align:middle}
+.chip .ic{width:1.1em;height:1.1em;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.6em}
+.chip.purple{background:linear-gradient(180deg,#F1ECFF,#DCD0FF);color:#7B4BE0;box-shadow:0 14px 40px rgba(123,75,224,.25)}
+.chip.red{background:#FFF3F3;color:var(--red);border:3px solid var(--red);border-radius:6px;box-shadow:none;padding:4px 18px 8px 12px}
+.chip.gray{background:#F1F2F5;color:#4B5060;box-shadow:0 10px 30px rgba(20,20,40,.1)}
+/* s1 */
+.bigcard{position:absolute;left:90px;right:90px;top:700px;background:#fff;border:3px solid var(--amber);border-radius:44px;padding:48px 52px;display:flex;gap:36px;align-items:center;box-shadow:0 0 0 14px rgba(245,180,0,.14),0 40px 140px rgba(40,50,90,.25)}
+.bigcard .av{width:150px;height:150px;border-radius:38px;font-size:56px}
 .bigcard .nm{font-weight:800;font-size:50px}
 .bigcard .tm{color:var(--muted);font-size:36px;font-weight:500;margin-left:14px}
 .bigcard .tx{font-size:120px;font-weight:900;letter-spacing:-3px;margin-top:4px}
-/* promise bubbles */
-.pb{position:absolute;background:#232730;border:2px solid #333845;border-radius:32px;padding:20px 30px;font-size:44px;font-weight:700;white-space:nowrap;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-/* notif */
-.notif{position:absolute;left:60px;right:60px;top:300px;background:rgba(242,243,247,.97);color:#111;border-radius:48px;padding:36px 40px;display:flex;gap:30px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.pb{position:absolute;background:#fff;border:2px solid var(--line);border-radius:32px;padding:20px 30px;font-size:44px;font-weight:700;white-space:nowrap;box-shadow:0 20px 50px rgba(40,50,90,.16)}
+.notif{position:absolute;left:60px;right:60px;top:300px;background:rgba(255,255,255,.96);color:#111;border-radius:48px;padding:36px 40px;display:flex;gap:30px;box-shadow:0 30px 90px rgba(40,50,90,.28);border:2px solid var(--line)}
 .notif .ic{width:104px;height:104px;border-radius:26px;background:linear-gradient(#4FA3FF,#1E6FF0);display:flex;align-items:center;justify-content:center;font-size:58px;flex:none}
 .notif .t1{display:flex;font-size:32px;font-weight:800}
 .notif .t1 span{margin-left:auto;color:#777;font-weight:500}
 .notif .t2{font-size:42px;margin-top:8px;line-height:1.25;font-weight:500}
-.chip{position:absolute;left:0;right:0;display:flex;justify-content:center}
-.chip span{background:rgba(250,204,21,.14);color:var(--warn);border:2px solid rgba(250,204,21,.4);border-radius:999px;padding:14px 34px;font-size:36px;font-weight:800;letter-spacing:1px}
+.tchip{position:absolute;left:0;right:0;display:flex;justify-content:center}
+.tchip span{background:#FFF7DB;color:#9A6B00;border:2px solid #F5D77A;border-radius:999px;padding:14px 34px;font-size:36px;font-weight:800;letter-spacing:1px}
 /* s4 */
-.kin{position:absolute;left:70px;right:70px;font-weight:900;letter-spacing:-3px;line-height:1.02}
-.mark{background:linear-gradient(transparent 58%,rgba(139,124,255,.55) 58%);padding:0 6px}
-.dm{position:absolute;left:70px;right:70px;height:150px;background:#171A21;border:2px solid var(--line);border-radius:36px;display:flex;align-items:center;gap:28px;padding:0 34px}
+.kin{position:absolute;left:70px;right:70px;font-weight:800;letter-spacing:-3px;line-height:1.08}
+.dm{position:absolute;left:70px;right:70px;height:150px;background:#fff;border:2px solid var(--line);border-radius:36px;display:flex;align-items:center;gap:28px;padding:0 34px;box-shadow:0 20px 50px rgba(40,50,90,.1)}
 .dm .to{color:var(--muted);font-size:30px;font-weight:600}
 .dm .ty{font-size:42px;font-weight:600}
-.dm .caret{display:inline-block;width:4px;height:44px;background:var(--accent2);vertical-align:-6px;margin-left:4px}
+.dm .caret{display:inline-block;width:4px;height:44px;background:var(--blue);vertical-align:-6px;margin-left:4px}
 .dm .sent{margin-left:auto;font-size:34px;color:var(--muted)}
-/* logo */
-.logo{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:34px}
-.pm{width:170px;height:170px;border-radius:46px;background:linear-gradient(135deg,#A99CFF,#6A56F5);display:flex;align-items:center;justify-content:center;font-size:104px;font-weight:900;color:#fff;box-shadow:0 30px 100px rgba(139,124,255,.55)}
-.wm{font-size:150px;font-weight:900;letter-spacing:-5px}
-/* pondros card */
-.pcard{margin-top:16px;border:2px solid #353A48;border-left:10px solid var(--accent);background:#1D2029;border-radius:26px;padding:30px 34px}
-.pcard .h{font-size:28px;font-weight:800;color:var(--accent2);letter-spacing:1px;text-transform:uppercase}
-.pcard .ti{font-size:44px;font-weight:800;margin:10px 0 22px}
-.row{display:flex;gap:18px;flex-wrap:wrap}
-.fld{display:flex;align-items:center;gap:14px;background:#262A35;border-radius:18px;padding:14px 22px;font-size:32px;font-weight:700}
-.fld small{color:var(--muted);font-size:28px;font-weight:600}
-.fld .av{width:48px;height:48px;border-radius:12px;font-size:24px}
-.btns{display:flex;gap:18px;margin-top:26px}
-.btn{border-radius:18px;padding:18px 34px;font-size:34px;font-weight:800;border:2px solid #3A3F4D;position:relative;overflow:hidden}
-.btn.pri{background:var(--ok);border-color:var(--ok);color:#06210F}
+/* s5b card (matches in-product) */
+.pcard{margin-top:16px;border:2px solid var(--line);background:#F7F8FA;border-radius:22px;padding:28px 30px}
+.pcard .l1{font-size:36px;line-height:1.35;color:#1F2128}
+.pcard .l2{font-size:32px;color:var(--muted);margin-top:14px}
+.fld{border-radius:10px;padding:0 6px;transition:none}
+.btns{display:flex;gap:16px;margin-top:24px;flex-wrap:wrap}
+.btn{border-radius:14px;padding:16px 28px;font-size:30px;font-weight:600;border:2px solid #DADDE4;background:#fff;color:#1F2128;position:relative;overflow:hidden}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);width:40px;height:40px;transform:translate(-50%,-50%)}
-.finger{position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.28);border:5px solid rgba(255,255,255,.85);box-shadow:0 10px 40px rgba(0,0,0,.4)}
-/* s7 list */
-.li{display:flex;align-items:center;gap:26px;padding:26px 0;border-bottom:2px solid var(--line)}
-.cb{width:60px;height:60px;border-radius:18px;border:4px solid #4A5060;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#06210F;flex:none}
-.li .t{font-size:38px;font-weight:700}
-.li .d{margin-left:auto;font-size:30px;color:var(--muted);font-weight:600;white-space:nowrap}
-.li .av{width:60px;height:60px;border-radius:16px;font-size:28px}
+.cursor{position:absolute;width:70px;height:90px}
+/* s6 */
+.nudger{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:18px}
+.nudger .circ{width:130px;height:130px;border-radius:50%;background:#000;overflow:hidden;box-shadow:0 20px 50px rgba(20,20,40,.25)}
+.nudger .circ img{width:100%;height:100%}
+.pill{background:#fff;border-radius:999px;padding:14px 30px;font-size:34px;box-shadow:0 12px 36px rgba(40,50,90,.12)}
+.dmcard{position:absolute;left:70px;right:70px;background:#fff;border-radius:34px;box-shadow:0 30px 90px rgba(40,50,90,.16);border:2px solid var(--line);overflow:hidden}
+.dmcard .hd{padding:26px 36px;font-size:30px;font-weight:700;color:#4B5060;display:flex;align-items:center;gap:14px}
+.dmcard .bd{background:#F3F4F7;padding:34px 36px 38px}
+.dmcard .bd .tx{font-size:42px;line-height:1.35}
+.bubble{position:absolute;right:70px;background:var(--blue);color:#fff;font-size:40px;font-weight:500;padding:26px 36px;border-radius:34px 34px 8px 34px;box-shadow:0 20px 50px rgba(47,107,230,.35)}
+/* s7 steps */
+.step{position:absolute;left:90px;right:90px;height:150px;background:#fff;border-radius:30px;border:2px solid var(--line);box-shadow:0 20px 60px rgba(40,50,90,.12);display:flex;align-items:center;gap:26px;padding:0 34px}
+.step .si{width:72px;height:72px;border-radius:20px;background:#F1F2F5;display:flex;align-items:center;justify-content:center;font-size:36px;flex:none}
+.step .st{font-size:40px;font-weight:700}
+.step .ss{font-size:28px;color:var(--muted);font-weight:500;margin-top:4px}
+.step .ck{margin-left:auto;width:64px;height:64px;border-radius:50%;background:#1FA855;color:#fff;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:900}
 /* end */
-.end{background:radial-gradient(1000px 900px at 50% 30%,#2A2366,#0B0D12 70%)}
-.cta{display:inline-flex;align-items:center;gap:20px;background:#fff;color:#0B0D12;border-radius:999px;padding:34px 70px;font-size:58px;font-weight:900;letter-spacing:-1px;box-shadow:0 30px 100px rgba(139,124,255,.6)}
+.slackpill{display:inline-flex;align-items:center;gap:22px;background:#141517;color:#fff;border-radius:999px;padding:26px 52px 26px 40px;font-size:50px;font-weight:600;letter-spacing:-.5px;box-shadow:0 30px 80px rgba(20,20,40,.3)}
+.slackpill img{width:62px;height:62px;border-radius:8px}
 </style></head>
 <body>
-<div class="bgglow"></div>
+<div class="blob" style="width:900px;height:900px;right:-300px;top:-250px;background:#E4DAFF;opacity:.9"></div>
+<div class="blob" style="width:1000px;height:1000px;left:-420px;bottom:-200px;background:#D2E2FF;opacity:.95"></div>
+<div class="blob" style="width:700px;height:700px;right:-200px;bottom:300px;background:#DDF0FF;opacity:.8"></div>
 
 <!-- S1-S3 chat -->
-<div class="layer" id="chatL">
-  <div class="panel">
-    <div class="phead"><span class="ch"># client-acme</span><span class="sub" id="chatSub">Monday</span></div>
-    <div class="msgs" id="msgs"></div>
-  </div>
-</div>
-<div class="layer" id="s1">
-  <div class="bigcard" id="big">
-    <div class="av" style="background:#F59E8B">J</div>
-    <div><div><span class="nm">Jess</span><span class="tm">9:41 AM</span></div><div class="tx">on it 👍</div></div>
-  </div>
-</div>
+<div class="layer" id="chatL"><div class="panel">
+  <div class="phead"><span class="ch"># client-acme</span><span class="sub" id="chatSub">Monday</span></div>
+  <div class="msgs" id="msgs"></div>
+</div></div>
+<div class="layer" id="s1"><div class="bigcard" id="big">
+  <div class="av">JL</div>
+  <div><div><span class="nm">Jess Lin</span><span class="tm">9:41 AM</span></div><div class="tx">on it 👍</div></div>
+</div></div>
 <div class="cap" id="c2" style="top:280px"><span>Famous last words.</span></div>
 
 <!-- S3 -->
 <div class="layer" id="s3">
   <div id="pbs"></div>
-  <div class="chip" id="friday" style="top:1020px"><span>FRIDAY · 4:52 PM</span></div>
-  <div class="notif" id="notif">
-    <div class="ic">✉️</div>
-    <div style="flex:1"><div class="t1">Dana · Acme Co.<span>now</span></div><div class="t2">Hi! Any update on the revised deck? 🙂</div></div>
-  </div>
+  <div class="tchip" id="friday" style="top:1020px"><span>FRIDAY · 4:52 PM</span></div>
+  <div class="notif" id="notif"><div class="ic">✉️</div>
+    <div style="flex:1"><div class="t1">Dana · Acme Co.<span>now</span></div><div class="t2">Hi! Any update on the revised deck? 🙂</div></div></div>
 </div>
 <div class="cap" id="c3" style="top:720px"><span>…then the client asks 😬</span></div>
 
 <!-- S4 -->
 <div class="layer" id="s4">
-  <div class="kin" id="k1" style="top:300px;font-size:92px">You're not<br>a manager.</div>
-  <div class="kin" id="k2" style="top:520px;font-size:92px;color:#fff">You're a <span class="mark">human reminder.</span></div>
+  <div class="kin" id="k1" style="top:300px;font-size:92px;color:#9095A3">You're not<br>a manager.</div>
+  <div class="kin" id="k2" style="top:530px;font-size:92px">You're a <span class="chip purple" style="font-size:84px;letter-spacing:-2px"><span class="ic">🔔</span>human reminder</span></div>
   <div id="dms"></div>
 </div>
 
-<!-- S5 -->
-<div class="layer" id="logoL">
-  <div class="logo" style="top:760px"><div class="pm">P</div><div class="wm">Pondros</div></div>
-</div>
-<div class="layer" id="s5">
-  <div class="panel">
-    <div class="phead"><span class="ch"># client-acme</span><span class="sub">Monday</span></div>
-    <div class="msgs" style="padding-top:26px">
-      <div class="msg"><div class="av" style="background:#7DD3FC">S</div><div class="mb"><div><span class="nm">Sam</span><span class="tm">9:38 AM</span></div><div class="tx">Acme wants the revised deck by Thursday. Who can take it?</div></div></div>
-      <div class="msg"><div class="av" style="background:#F59E8B">J</div><div class="mb"><div><span class="nm">Jess</span><span class="tm">9:41 AM</span></div><div class="tx">on it 👍</div></div></div>
-      <div class="msg" id="botmsg"><div class="av" style="background:linear-gradient(135deg,#A99CFF,#6A56F5);color:#fff">P</div><div class="mb" style="flex:1"><div><span class="nm">Pondros</span><span class="tm">APP · 9:41 AM</span></div>
-        <div class="pcard" id="pcard"><div class="h">📌 Commitment tracked</div><div class="ti">Send revised deck to Acme</div>
-          <div class="row"><div class="fld" id="fOwner"><small>Owner</small><div class="av" style="background:#F59E8B">J</div>Jess</div><div class="fld" id="fDue"><small>Due</small>Thu</div><div class="fld" id="fSrc"><small>From</small>#client-acme</div></div>
-        </div></div></div>
-    </div>
+<!-- S5a meet -->
+<div class="layer" id="meet">
+  <div style="position:absolute;left:0;right:0;top:560px;text-align:center;font-size:64px;font-weight:700;letter-spacing:-1.5px" id="meetT">Meet</div>
+  <div id="logoRow" style="position:absolute;left:0;right:0;top:660px;display:flex;justify-content:center;align-items:center;gap:30px">
+    <div class="mark" style="width:190px;height:190px;border-radius:38px"><img src="assets/glyph.png"></div>
+    <div class="wm" style="font-size:150px">Pondros</div>
   </div>
 </div>
-<div class="cap" id="c5" style="top:280px"><span>Every “on it” → <em>tracked</em></span></div>
+<div class="layer" id="nota">
+  <div style="position:absolute;left:0;right:0;top:640px;text-align:center;font-size:66px;font-weight:600;letter-spacing:-1.5px;line-height:1.6">
+    <div id="na1">Pondros is not another</div>
+    <div id="na2" style="margin-top:6px"><span class="chip red" id="taskchip" style="font-size:72px"><span style="font-size:.8em">☒</span> task app</span></div>
+    <div id="na3" style="margin-top:40px">It's an <span class="chip" style="font-size:72px"><span class="ic">↓</span>AI project manager</span></div>
+    <div id="na4" style="margin-top:24px;font-size:48px;color:var(--muted);font-weight:600">right inside Slack</div>
+  </div>
+</div>
 
-<!-- S6 -->
-<div class="layer" id="s6">
-  <div class="panel">
-    <div class="phead"><div class="av" style="width:64px;height:64px;border-radius:18px;font-size:34px;background:linear-gradient(135deg,#A99CFF,#6A56F5);color:#fff">P</div><span class="ch">Pondros</span><span class="sub">Jess's DMs</span></div>
-    <div class="msgs" style="padding-top:150px">
-      <div class="divider">Wednesday</div>
-      <div class="msg" id="nudge"><div class="av" style="background:linear-gradient(135deg,#A99CFF,#6A56F5);color:#fff">P</div><div class="mb" style="flex:1"><div><span class="nm">Pondros</span><span class="tm">APP · 10:00 AM</span></div>
-        <div class="tx">⏰ Heads up, Jess: <b style="color:#fff">Send revised deck to Acme</b> is due <b style="color:var(--warn)">tomorrow</b>.</div>
-        <div class="btns" id="btns"><div class="btn pri" id="doneBtn">✓ Mark done<div class="ripple" id="rip" style="left:50%;top:50%;opacity:0"></div></div><div class="btn">Snooze</div></div>
-        <div class="pcard" id="doneCard" style="border-left-color:var(--ok);opacity:0;margin-top:26px"><div class="h" style="color:var(--ok)">✅ Done</div><div class="ti" style="margin-bottom:0">Send revised deck to Acme <span style="color:var(--muted);font-weight:600;font-size:32px">· Jess · Wed 10:02 AM</span></div></div>
-      </div></div>
-    </div>
+<!-- S5b capture -->
+<div class="layer" id="s5"><div class="panel" style="top:520px;height:1310px">
+  <div class="phead"><span class="ch"># client-acme</span><span class="sub">Monday</span></div>
+  <div class="msgs" style="padding-top:26px">
+    <div class="msg"><div class="av">SK</div><div class="mb"><div><span class="nm">Sam Kerr</span><span class="tm">9:38 AM</span></div><div class="tx"><span class="at">@Jess</span> can you get the revised deck over to Acme by Thursday?</div></div></div>
+    <div class="msg"><div class="av">JL</div><div class="mb"><div><span class="nm">Jess Lin</span><span class="tm">9:41 AM</span></div><div class="tx">on it 👍</div></div></div>
+    <div class="msg" id="botmsg"><div class="av p"><img src="assets/glyph.png"></div><div class="mb"><div><span class="nm">Pondros</span><span class="app">APP</span><span class="tm">9:41 AM</span></div>
+      <div class="pcard" id="pcard">
+        <div class="l1">✅ Added to Pondros — <b>Send the revised deck to Acme</b> · <span class="fld" id="fOwner">owner: <b>Jess</b></span> · <span class="fld" id="fDue">due <b>Thu</b></span></div>
+        <div class="l2">📋 Board <b style="color:#1F2128">Client work</b> › project <b style="color:#1F2128">#acme</b></div>
+        <div class="btns"><div class="btn">✓ Mark as Done</div><div class="btn">✕ Not a task</div></div>
+      </div></div></div>
   </div>
-  <div class="finger" id="finger" style="opacity:0"></div>
+</div></div>
+<div class="cap" id="c5" style="top:280px"><span>✅ Captured automatically<br><span style="font-size:40px;font-weight:600;color:#B9BEC9;letter-spacing:-.5px">No commands. No tagging.</span></span></div>
+
+<!-- S6 chase -->
+<div class="layer" id="s6">
+  <div class="nudger" id="nudger" style="top:300px"><div class="circ"><img src="assets/glyph.png"></div><div class="pill"><b>Pondros</b> <span style="color:var(--muted)">nudging Jess</span> <span id="dots" style="color:#B0B4BF">•••</span></div></div>
+  <div class="dmcard" id="dmcard" style="top:600px">
+    <div class="hd"><span style="display:inline-block;width:40px;height:40px;border-radius:10px;background:#000;overflow:hidden"><img src="assets/glyph.png" style="width:100%;height:100%"></span>Jess · direct message</div>
+    <div class="bd"><div class="tx">Quick chase: you own <b>“Send the revised deck to Acme,”</b> due <b>Thursday</b>. Still on track?</div>
+      <div class="btns"><div class="btn pri" id="onitBtn">On it ✓<div class="ripple" id="rip" style="left:50%;top:50%;opacity:0"></div></div><div class="btn" style="color:#6B7280">Snooze</div></div></div>
+  </div>
+  <div class="bubble" id="reply" style="top:1140px">On it, sending this afternoon.</div>
+  <svg class="cursor" id="cursor" viewBox="0 0 28 36" style="opacity:0"><path d="M2 2 L2 28 L9 21 L14 33 L19 31 L14 19 L24 19 Z" fill="#000" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>
 </div>
-<div class="cap" id="c6" style="top:280px"><span>It chases. <em>You don't.</em></span></div>
+<div class="cap" id="c6" style="top:1330px"><span>So nobody has to <em>circle back</em></span></div>
 
 <!-- S7 -->
 <div class="layer" id="s7">
-  <div class="panel" style="top:450px;height:1380px">
-    <div class="phead"><span class="ch">This week</span><span class="sub" id="cnt">Done 0/6</span></div>
-    <div class="msgs" id="list" style="padding-top:6px"></div>
-  </div>
+  <div style="position:absolute;left:0;right:0;top:350px;text-align:center;font-size:64px;font-weight:800;letter-spacing:-2.5px;white-space:nowrap"><span id="w1">Capture</span> <span style="color:#B0B4BF">→</span> <span id="w2">Chase</span> <span style="color:#B0B4BF">→</span> <span id="w3">Complete</span></div>
+  <div class="step" id="st0" style="top:560px"><div class="si">✍️</div><div><div class="st">Captured from #client-acme</div><div class="ss">Jess · due Thu</div></div><div class="ck" id="ck0">✓</div></div>
+  <div class="step" id="st1" style="top:740px"><div class="si">🔔</div><div><div class="st">Chased Jess in DM</div><div class="ss">Wed 10:00 AM · “On it ✓”</div></div><div class="ck" id="ck1">✓</div></div>
+  <div class="step" id="st2" style="top:920px"><div class="si">📄</div><div><div class="st">Revised deck sent to Acme</div><div class="ss">Done · Wed 3:12 PM</div></div><div class="ck" id="ck2">✓</div></div>
 </div>
-<div class="cap" id="c7" style="top:280px"><span style="font-size:58px;white-space:nowrap;padding:26px 36px"><b id="w1">Capture</b> → <b id="w2">Chase</b> → <b id="w3">Complete</b></span></div>
 
-<!-- S8 -->
-<div class="layer end" id="s8">
-  <div class="logo" style="top:420px;gap:26px"><div class="pm" style="width:120px;height:120px;border-radius:34px;font-size:72px">P</div><div class="wm" style="font-size:100px">Pondros</div></div>
-  <div style="position:absolute;left:0;right:0;top:620px;text-align:center;font-weight:900;font-size:124px;letter-spacing:-4px;line-height:1.02" id="endH"><div id="e1">Stop chasing.</div><div id="e2" style="color:var(--accent2)">Start finishing.</div></div>
-  <div style="position:absolute;left:0;right:0;top:960px;text-align:center" id="ctaW"><div class="cta">Try Pondros →</div></div>
-  <div style="position:absolute;left:0;right:0;top:1130px;text-align:center;font-size:44px;font-weight:700;color:#C9CCD6" id="url">pondros.com</div>
-  <div style="position:absolute;left:0;right:0;top:1220px;text-align:center;font-size:80px" id="arrow">⬇️</div>
+<!-- S8 end card (matches brand end card) -->
+<div class="layer" id="s8">
+  <div id="endLogo" style="position:absolute;left:0;right:0;top:420px;display:flex;justify-content:center"><div class="mark" style="width:230px;height:230px;border-radius:46px"><img src="assets/glyph.png"></div></div>
+  <div id="endWm" class="wm" style="position:absolute;left:0;right:0;top:680px;text-align:center;font-size:170px">Pondros</div>
+  <div id="endTag" style="position:absolute;left:0;right:0;top:900px;text-align:center;font-size:84px;font-weight:700;letter-spacing:-2px"><span class="grad">Never circle back.</span></div>
+  <div id="endCta" style="position:absolute;left:0;right:0;top:1060px;display:flex;justify-content:center"><div class="slackpill"><img src="assets/slack_on_dark.png">Add to Slack · pondros.com</div></div>
 </div>
 
 <script>
@@ -172,98 +190,87 @@ const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const prog=(t,a,b)=>clamp((t-a)/(b-a));
 const eo=x=>1-Math.pow(1-x,3);
 const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
-const back=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const back=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
 const vis=(t,a,b,fi=.2,fo=.2)=>Math.min(prog(t,a,a+fi),1-prog(t,b-fo,b));
-const COLORS={S:'#7DD3FC',J:'#F59E8B',P:'#FDE68A',M:'#86EFAC',A:'#C4B5FD',R:'#FCA5A5',K:'#FDBA74',D:'#93C5FD'};
-const NAMES={S:'Sam',J:'Jess',P:'Priya',M:'Marco',A:'Alex',R:'Rosa',K:'Kai',D:'Dev'};
-function msgHTML(k,time,text,id){return `<div class="msg" ${id?`id="${id}"`:''}><div class="av" style="background:${COLORS[k]}">${k}</div><div class="mb"><div><span class="nm">${NAMES[k]}</span><span class="tm">${time}</span></div><div class="tx">${text}</div></div></div>`}
-// build chat
+const IN={S:'SK',J:'JL',P:'PR',M:'MO',A:'AD',R:'RC',K:'KT',D:'DV'};
+const NAMES={S:'Sam Kerr',J:'Jess Lin',P:'Priya R',M:'Marco O',A:'Alex D',R:'Rosa C',K:'Kai T',D:'Dev V'};
+function msgHTML(k,time,text,id){return `<div class="msg" ${id?`id="${id}"`:''}><div class="av">${IN[k]}</div><div class="mb"><div><span class="nm">${NAMES[k]}</span><span class="tm">${time}</span></div><div class="tx">${text}</div></div></div>`}
 const filler=[['M','standup moved to 10:30'],['A','PR is up for the pricing page 🙏'],['P','can someone check the Northwind invoice?'],['K','lunch? 🌯'],['D','deploy is green ✅'],['R','new brief from Globex just landed'],['M','who has the Figma link?'],['A','call with Initech at 2'],['S','reminder: timesheets today'],['P','🎉 we won the Umbrella pitch!'],['K','wifi is down on 3rd floor'],['D','updated the roadmap doc'],['R','can we push the retro?'],['M','👀 check #design'],['A','client feedback in the doc'],['S','OOO tomorrow'],['P','sent the SOW to Hooli'],['K','anyone seen my charger'],['D','hotfix going out now'],['R','🎂 cake in the kitchen'],['M','notes from the sync ⬇️'],['A','budget approved'],['S','moving this to Thursday'],['P','quick q on the brief'],['K','ok'],['D','+1'],['R','thanks all!'],['M','🙌']];
-let h=msgHTML('A','9:12 AM','morning all ☀️')+msgHTML('D','9:30 AM','kickoff notes are in the drive')+msgHTML('S','9:38 AM','Acme wants the revised deck by Thursday. Who can take it?')+msgHTML('J','9:41 AM','on it 👍','onit');
+let h=msgHTML('A','9:12 AM','morning all ☀️')+msgHTML('D','9:30 AM','kickoff notes are in the drive')+msgHTML('S','9:38 AM','<span class="at">@Jess</span> can you get the revised deck over to Acme by Thursday?')+msgHTML('J','9:41 AM','on it 👍','onit');
 filler.forEach((f,i)=>{h+=msgHTML(f[0],`${9+Math.floor((42+i*7)/60)}:${String((42+i*7)%60).padStart(2,'0')} AM`,f[1])});
 $('msgs').innerHTML=h;
-// promise bubbles
 const PB=[['on it 👍',80,330],['will do!',600,420],["I'll send it tonight",140,560],['yep, today',640,660],["I'll follow up 👌",90,800],['leave it with me',560,920],['👍',860,540],['on it',120,1060],['sure, by EOD',600,1140],["I'll ping them",180,1270]];
 $('pbs').innerHTML=PB.map((p,i)=>`<div class="pb" id="pb${i}" style="left:${p[1]}px;top:${p[2]}px">${p[0]}</div>`).join('');
-// dms
 const DMS=[['J','Jess'],['M','Marco'],['P','Priya']];
-$('dms').innerHTML=DMS.map((d,i)=>`<div class="dm" id="dm${i}" style="top:${900+i*180}px"><div class="av" style="background:${COLORS[d[0]]};width:80px;height:80px">${d[0]}</div><div><div class="to">to ${d[1]}</div><div class="ty"><span id="dmt${i}"></span><span class="caret" id="dmc${i}"></span></div></div><div class="sent" id="dms${i}"></div></div>`).join('');
-// list
-const LIST=[['J','Send revised deck to Acme','Thu'],['M','Book Globex kickoff','Tue'],['P','Chase Northwind invoice','Wed'],['A','Ship pricing page copy','Wed'],['D','Fix staging login bug','Thu'],['R','Share Umbrella SOW','Fri']];
-$('list').innerHTML=LIST.map((l,i)=>`<div class="li" id="li${i}"><div class="cb" id="cb${i}"></div><div class="av" style="background:${COLORS[l[0]]}">${l[0]}</div><div class="t" id="lt${i}">${l[1]}</div><div class="d">${NAMES[l[0]]} · ${l[2]}</div></div>`).join('');
-
-const onitTop=()=>$('onit').offsetTop;
-function setCap(id,t,a,b){const e=$(id),v=vis(t,a,b,.18,.18),p=eo(prog(t,a,a+.35));e.style.opacity=v;e.style.transform=`translateY(${(1-p)*30}px) scale(${.9+.1*back(prog(t,a,a+.35))})`;}
+$('dms').innerHTML=DMS.map((d,i)=>`<div class="dm" id="dm${i}" style="top:${900+i*180}px"><div class="av" style="width:80px;height:80px">${IN[d[0]]}</div><div><div class="to">to ${d[1]}</div><div class="ty"><span id="dmt${i}"></span><span class="caret" id="dmc${i}"></span></div></div><div class="sent" id="dms${i}"></div></div>`).join('');
 const DMTXT='hey, did this get done?';
+function setCap(id,t,a,b){const e=$(id),v=vis(t,a,b,.18,.18),p=prog(t,a,a+.35);e.style.opacity=v;e.style.transform=`translateY(${(1-eo(p))*30}px) scale(${.9+.1*back(p)})`;}
+function rise(e,p,d=50){e.style.opacity=p;e.style.transform=`translateY(${(1-eo(p))*d}px)`;}
 
 window.render=function(t){
-  // ---------- chat (S1-S3)
-  const chat=$('chatL');
-  chat.style.opacity=t<1.25?.35:t<1.6?.35+.65*prog(t,1.25,1.6):t<4.0?1:t<9.3?1-.82*prog(t,4.0,4.4):.18*(1-prog(t,9.3,9.5));
-  // scroll
+  // chat S1-S3
+  $('chatL').style.opacity=t<1.25?.35:t<1.6?.35+.65*prog(t,1.25,1.6):t<4.0?1:t<9.4?1-.8*prog(t,4.0,4.4):.2*(1-prog(t,9.4,9.6));
   const s=eio(prog(t,2.0,3.9))*3000;
-  const base=300-onitTop();
-  $('msgs').style.transform=`translateY(${base-s}px)`;
+  $('msgs').style.transform=`translateY(${300-$('onit').offsetTop-s}px)`;
   const vel=t>2.0&&t<3.9?Math.sin(Math.PI*prog(t,2.0,3.9)):0;
   $('msgs').style.filter=`blur(${vel*6}px)`;
-  const oe=$('onit');oe.classList.add('hl');
-  oe.style.background=`rgba(250,204,21,${0.16*vis(t,1.4,3.2,.3,.6)})`;
-  oe.style.boxShadow=`inset 0 0 0 3px rgba(250,204,21,${0.8*vis(t,1.4,3.2,.3,.6)})`;
+  const oe=$('onit');oe.classList.add('hl');const hv=vis(t,1.4,3.2,.3,.6);
+  oe.style.background=`rgba(255,236,160,${.55*hv})`;oe.style.boxShadow=`inset 0 0 0 3px rgba(245,180,0,${.9*hv})`;
   $('chatSub').textContent=t<4.3?'Monday':'Friday';
-  // ---------- S1 big card
-  const bp=prog(t,0.0,0.35);
+  // S1
   $('s1').style.opacity=t<1.4?1:1-prog(t,1.4,1.7);
   const shake=t>0.3&&t<0.7?Math.sin(t*90)*8*(1-prog(t,0.3,0.7)):0;
-  const sc=t<1.4?(1.35-0.35*eo(bp))+0.03*prog(t,0.35,1.4):1-0.2*prog(t,1.4,1.7);
+  const sc=t<1.4?(1.35-0.35*eo(prog(t,0,.35)))+0.03*prog(t,0.35,1.4):1-0.2*prog(t,1.4,1.7);
   $('big').style.transform=`translate(${shake}px,${-100*prog(t,1.4,1.7)}px) scale(${sc})`;
   setCap('c2',t,1.5,4.0);
-  // ---------- S3
-  $('s3').style.opacity=vis(t,4.0,9.3,.15,.25);
+  // S3
+  $('s3').style.opacity=vis(t,4.0,9.4,.15,.25);
   PB.forEach((p,i)=>{const a=4.15+i*0.2,e=$('pb'+i),pp=prog(t,a,a+.3);const fall=eio(prog(t,6.2,6.9));e.style.opacity=Math.min(pp,1-fall);e.style.transform=`translateY(${fall*(300+i*40)}px) rotate(${(i%2?1:-1)*(3+fall*20)}deg) scale(${.6+.4*back(pp)})`;});
-  const fr=$('friday');fr.style.opacity=vis(t,6.5,9.3,.2,.2);fr.style.transform=`scale(${.9+.1*back(prog(t,6.5,6.8))})`;
+  const fr=$('friday');fr.style.opacity=vis(t,6.5,9.4,.2,.2);fr.style.transform=`scale(${.9+.1*back(prog(t,6.5,6.8))})`;
   const np=eo(prog(t,6.7,7.1));const buzz=t>7.0&&t<7.8?Math.sin(t*110)*10*(1-prog(t,7.0,7.8)):0;
   $('notif').style.opacity=np;$('notif').style.transform=`translate(${buzz}px,${(1-np)*-260}px)`;
-  setCap('c3',t,7.3,9.3);
-  // ---------- S4
-  $('s4').style.opacity=vis(t,9.3,12.8,.2,.25);
-  const k1=prog(t,9.4,9.8);$('k1').style.opacity=k1*(1-0.55*prog(t,11.0,11.3));$('k1').style.transform=`translateY(${(1-eo(k1))*40}px)`;
-  const k2=prog(t,11.0,11.35);$('k2').style.opacity=k2;$('k2').style.transform=`translateY(${(1-eo(k2))*40+(1-k2)*0}px) scale(${.92+.08*back(k2)})`;
-  $('k1').style.top=(300-0*k2)+'px';
-  DMS.forEach((d,i)=>{const a=9.5+i*0.75,e=$('dm'+i),p=prog(t,a,a+.2);e.style.opacity=p;e.style.transform=`translateX(${(1-eo(p))*80}px)`;const n=Math.floor(DMTXT.length*prog(t,a+.1,a+.65));$('dmt'+i).textContent=DMTXT.slice(0,n);$('dmc'+i).style.opacity=(n<DMTXT.length&&Math.floor(t*6)%2==0)||n<DMTXT.length?1:0;$('dms'+i).textContent=t>a+.72?'sent ✓':'';});
-  // ---------- S5
-  const lg=$('logoL');lg.style.opacity=vis(t,12.8,13.75,.12,.25);lg.firstElementChild.style.transform=`scale(${.8+.2*back(prog(t,12.8,13.2))})`;
-  $('s5').style.opacity=vis(t,13.6,18.0,.25,.25);
-  const bm=prog(t,14.1,14.45);$('botmsg').style.opacity=bm;$('botmsg').style.transform=`translateY(${(1-eo(bm))*60}px)`;
-  const pulse=vis(t,14.4,15.6,.2,.8);$('pcard').style.boxShadow=`0 0 0 ${pulse*16}px rgba(139,124,255,${.25*pulse})`;
-  [['fOwner',15.9],['fDue',16.7],['fSrc',17.2]].forEach(([id,a])=>{const e=$(id),p=prog(t,a,a+.25);e.style.opacity=.35+.65*p;e.style.transform=`scale(${1+.12*Math.sin(Math.PI*p)})`;e.style.background=p>0?`rgba(139,124,255,${.12+.2*Math.sin(Math.PI*p)})`:'#262A35';e.style.outline=p>0?'2px solid rgba(139,124,255,.6)':'none';});
-  setCap('c5',t,14.2,18.0);
-  // ---------- S6
-  $('s6').style.opacity=vis(t,18.0,23.0,.25,.25);
-  const ng=prog(t,18.3,18.65);$('nudge').style.opacity=ng;$('nudge').style.transform=`translateY(${(1-eo(ng))*60}px)`;
-  const btn=$('doneBtn').getBoundingClientRect();
-  const fx=btn.left+btn.width/2,fy=btn.top+btn.height/2+10;
-  const fp=eio(prog(t,19.6,20.25));const f=$('finger');
-  f.style.opacity=vis(t,19.6,20.9,.2,.3);f.style.left=(fx-55+(1-fp)*260)+'px';f.style.top=(fy-55+(1-fp)*420)+'px';f.style.transform=`scale(${t>20.25&&t<20.45?.85:1})`;
-  const rp=prog(t,20.3,20.8);$('rip').style.opacity=rp>0?(1-rp)*.8:0;$('rip').style.width=$('rip').style.height=(40+rp*500)+'px';
-  $('btns').style.opacity=1-prog(t,20.7,20.95);
-  const dc=prog(t,20.8,21.15);$('doneCard').style.opacity=dc;$('doneCard').style.transform=`scale(${.9+.1*back(dc)})`;
-  $('btns').style.display=t>20.95?'none':'flex';
-  setCap('c6',t,18.4,23.0);
-  // ---------- S7
-  $('s7').style.opacity=vis(t,23.0,26.6,.25,.25);
-  let done=0;
-  LIST.forEach((l,i)=>{const a=23.5+i*0.38,p=prog(t,a,a+.18),cb=$('cb'+i);if(p>0)done++;cb.style.background=p>0?'var(--ok)':'transparent';cb.style.borderColor=p>0?'var(--ok)':'#4A5060';cb.textContent=p>0?'✓':'';cb.style.transform=`scale(${1+.3*Math.sin(Math.PI*p)})`;$('lt'+i).style.opacity=p>0?.5:1;$('lt'+i).style.textDecoration=p>=1?'line-through':'none';$('li'+i).style.opacity=prog(t,23.1+i*.06,23.35+i*.06);});
-  $('cnt').textContent=`Done ${done}/6`;$('cnt').style.color=done==6?'var(--ok)':'var(--muted)';
-  setCap('c7',t,23.05,26.6);
-  [['w1',23.1],['w2',23.75],['w3',24.4]].forEach(([id,a])=>{const e=$(id);const on=t>=a;e.style.color=on?(id=='w3'?'var(--ok)':'#fff'):'#555B69';});
-  // ---------- S8
-  $('s8').style.opacity=prog(t,26.6,26.9);
-  const e1=prog(t,26.8,27.15),e2=prog(t,27.55,27.9),cta=prog(t,28.3,28.65);
-  $('e1').style.opacity=e1;$('e1').style.transform=`translateY(${(1-eo(e1))*40}px)`;
-  $('e2').style.opacity=e2;$('e2').style.transform=`translateY(${(1-eo(e2))*40}px)`;
-  $('ctaW').style.opacity=cta;$('ctaW').style.transform=`scale(${(.85+.15*back(cta))*(1+.03*Math.sin(Math.max(0,t-28.8)*6))})`;
-  $('url').style.opacity=prog(t,28.6,28.9);
-  $('arrow').style.opacity=prog(t,29.0,29.3);$('arrow').style.transform=`translateY(${Math.abs(Math.sin(t*4))*24}px)`;
+  setCap('c3',t,7.3,9.4);
+  // S4
+  $('s4').style.opacity=vis(t,9.4,13.0,.2,.25);
+  rise($('k1'),prog(t,9.5,9.9),40);
+  const k2=prog(t,11.2,11.55);$('k2').style.opacity=k2;$('k2').style.transform=`translateY(${(1-eo(k2))*40}px) scale(${.94+.06*back(k2)})`;
+  DMS.forEach((d,i)=>{const a=9.6+i*0.75,e=$('dm'+i),p=prog(t,a,a+.2);e.style.opacity=p;e.style.transform=`translateX(${(1-eo(p))*80}px)`;const n=Math.floor(DMTXT.length*prog(t,a+.1,a+.65));$('dmt'+i).textContent=DMTXT.slice(0,n);$('dmc'+i).style.opacity=n<DMTXT.length?1:0;$('dms'+i).textContent=t>a+.72?'sent ✓':'';});
+  // S5a meet
+  $('meet').style.opacity=vis(t,13.0,14.3,.2,.25);
+  rise($('meetT'),prog(t,13.05,13.35),30);
+  const lr=prog(t,13.25,13.65);$('logoRow').style.opacity=lr;$('logoRow').style.transform=`scale(${.85+.15*back(lr)})`;$('logoRow').style.filter=`blur(${(1-lr)*14}px)`;
+  $('nota').style.opacity=vis(t,14.25,18.45,.2,.25);
+  rise($('na1'),prog(t,14.3,14.6),30);
+  const tc=prog(t,14.7,15.0);$('na2').style.opacity=tc;$('taskchip').style.transform=`scale(${.8+.2*back(tc)})`;
+  const na3=prog(t,15.9,16.3);$('na3').style.opacity=na3;$('na3').style.transform=`translateY(${(1-eo(na3))*30}px) scale(${.92+.08*back(na3)})`;
+  $('na2').style.filter=`grayscale(${prog(t,15.9,16.3)*.6})`;$('na2').style.opacity=tc*(1-.45*prog(t,15.9,16.3));
+  rise($('na4'),prog(t,17.0,17.3),20);
+  // S5b capture
+  $('s5').style.opacity=vis(t,18.4,23.0,.25,.25);
+  rise($('botmsg'),prog(t,18.9,19.25),60);
+  const pulse=vis(t,19.2,20.4,.2,.8);$('pcard').style.boxShadow=`0 0 0 ${pulse*14}px rgba(47,107,230,${.18*pulse})`;
+  [['fOwner',20.9],['fDue',21.8]].forEach(([id,a])=>{const e=$(id),p=prog(t,a,a+.3);e.style.background=p>0?`rgba(47,107,230,${.12+.18*Math.sin(Math.PI*Math.min(p,.5))})`:'transparent';e.style.boxShadow=p>0?'0 0 0 2px rgba(47,107,230,.5)':'none';});
+  setCap('c5',t,18.5,23.0);
+  // S6 chase
+  $('s6').style.opacity=vis(t,23.0,26.5,.25,.25);
+  rise($('nudger'),prog(t,23.05,23.35),30);
+  $('dots').style.opacity=.4+.6*Math.abs(Math.sin(t*5));
+  rise($('dmcard'),prog(t,23.35,23.7),60);
+  const b=$('onitBtn').getBoundingClientRect();const cx=b.left+b.width*.55,cy=b.top+b.height*.55;
+  const cp=eio(prog(t,23.9,24.5));const c=$('cursor');c.style.opacity=vis(t,23.9,25.4,.15,.3);c.style.left=(cx+(1-cp)*300)+'px';c.style.top=(cy+(1-cp)*380)+'px';c.style.transform=`scale(${t>24.5&&t<24.65?.85:1})`;
+  const rp=prog(t,24.55,25.0);$('rip').style.opacity=rp>0?(1-rp)*.8:0;$('rip').style.width=$('rip').style.height=(40+rp*400)+'px';
+  const rb=prog(t,24.9,25.25);$('reply').style.opacity=rb;$('reply').style.transform=`translateY(${(1-eo(rb))*40}px) scale(${.9+.1*back(rb)})`;
+  setCap('c6',t,24.2,26.5);
+  // S7
+  $('s7').style.opacity=vis(t,26.5,28.7,.2,.2);
+  [['w1',26.6],['w2',27.1],['w3',27.6]].forEach(([id,a],i)=>{$(id).style.color=t>=a?(i==2?'#1FA855':'#0B0B10'):'#C4C7D0';});
+  [0,1,2].forEach(i=>{const a=26.6+i*0.5;rise($('st'+i),prog(t,a-.1,a+.15),40);const p=prog(t,a+.15,a+.35);$('ck'+i).style.opacity=p;$('ck'+i).style.transform=`scale(${.5+.5*back(p)})`;});
+  // S8
+  $('s8').style.opacity=prog(t,28.6,28.85);
+  const l=prog(t,28.7,29.1);$('endLogo').style.opacity=l;$('endLogo').style.transform=`scale(${.8+.2*back(l)})`;
+  rise($('endWm'),prog(t,28.95,29.3),30);
+  const tg=prog(t,29.55,29.95);$('endTag').style.opacity=tg;$('endTag').style.filter=`blur(${(1-tg)*10}px)`;
+  const ct=prog(t,30.4,30.75);$('endCta').style.opacity=ct;$('endCta').style.transform=`translateY(${(1-eo(ct))*30}px) scale(${1+.02*Math.sin(Math.max(0,t-30.9)*5)})`;
 };
 render(0);
 </script>

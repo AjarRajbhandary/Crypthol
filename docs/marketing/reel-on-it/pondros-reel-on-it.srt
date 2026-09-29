@@ -1,56 +1,52 @@
 1
-00:00:00,350 --> 00:00:01,000
+00:00:00,350 --> 00:00:01,050
 On it.
 
 2
-00:00:01,500 --> 00:00:03,500
+00:00:01,500 --> 00:00:03,600
 The two most dangerous words in Slack.
 
 3
-00:00:04,100 --> 00:00:06,400
+00:00:04,100 --> 00:00:06,500
 Your team promises ten things a day in Slack.
 
 4
-00:00:06,500 --> 00:00:09,000
+00:00:06,500 --> 00:00:09,100
 You find out one slipped when the client asks.
 
 5
-00:00:09,400 --> 00:00:11,000
+00:00:09,500 --> 00:00:11,200
 And suddenly, you're not a manager.
 
 6
-00:00:11,000 --> 00:00:12,500
+00:00:11,200 --> 00:00:12,800
 You're a human reminder.
 
 7
-00:00:12,900 --> 00:00:15,500
-Pondros catches every commitment your team makes in Slack.
+00:00:13,100 --> 00:00:15,700
+Meet Pondros. Not another task app.
 
 8
-00:00:15,500 --> 00:00:17,800
-Who owns it, and when it's due.
+00:00:15,700 --> 00:00:18,200
+An AI project manager, right in Slack.
 
 9
-00:00:18,100 --> 00:00:20,400
-Then it follows up for them, right inside Slack.
+00:00:18,500 --> 00:00:20,800
+It captures every commitment automatically.
 
 10
-00:00:20,400 --> 00:00:22,800
-No new tool anyone has to open.
+00:00:20,800 --> 00:00:22,800
+Who owns it, and when it's due.
 
 11
-00:00:23,100 --> 00:00:24,900
-Capture. Chase. Complete.
+00:00:23,100 --> 00:00:26,200
+Then it chases for you, so nobody has to circle back.
 
 12
-00:00:24,900 --> 00:00:26,300
-Nothing falls through the cracks.
+00:00:26,600 --> 00:00:28,200
+Capture. Chase. Complete.
 
 13
-00:00:26,800 --> 00:00:28,300
-Stop chasing. Start finishing.
-
-14
-00:00:28,300 --> 00:00:30,300
-Try Pondros. Link below.
+00:00:28,800 --> 00:00:31,900
+Pondros. Never circle back. Add it to Slack today.
 
